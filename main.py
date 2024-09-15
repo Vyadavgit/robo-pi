@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
+# init configs
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 Ena,In1,In2 = 2,3,4
