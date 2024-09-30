@@ -25,12 +25,12 @@ while True:
     # Motor 1 forward
     GPIO.output(In1, GPIO.LOW)
     GPIO.output(In2, GPIO.HIGH)
-    pwm1.ChangeDutyCycle(30)
+    pwm1.ChangeDutyCycle(80)
 
     # Motor 2 forward
-    GPIO.output(In3, GPIO.LOW)
-    GPIO.output(In4, GPIO.HIGH)
-    pwm2.ChangeDutyCycle(30)
+    GPIO.output(In4, GPIO.LOW)
+    GPIO.output(In3, GPIO.HIGH)
+    pwm2.ChangeDutyCycle(80)
 
     sleep(5)
 
