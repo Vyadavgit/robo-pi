@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Start/Stop Buttons</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 100px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Start/Stop Buttons</h1>
+        <button class="button" onclick="startProcess()">Start</button>
+        <button class="button" onclick="stopProcess()">Stop</button>
+    </div>
+
+    <script>
+        function startProcess() {
+            fetch('/start')
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Process started');
+                    } else {
+                        console.error('Failed to start process');
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to start process:', error);
+                });
+        }
+
+        function stopProcess() {
+            fetch('/stop')
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Process stopped');
+                    } else {
+                        console.error('Failed to stop process');
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to stop process:', error);
+                });
+        }
+    </script>
+</body>
+</html>
