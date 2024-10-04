@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import subprocess
+import os
 
 app = Flask(__name__)
 process = None
@@ -20,6 +21,7 @@ def stop():
     if process:
         process.terminate()
         process = None
+        os.system('pkill -f main.py')  # Terminate the main.py process instantly
         return 'Process stopped', 200
     else:
         return 'No process running', 200
