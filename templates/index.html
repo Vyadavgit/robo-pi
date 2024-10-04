@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Start/Stop Buttons</title>
+    <style>
+        .container {
+            text-align: center;
+            margin-top: 100px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        #logBox {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            font-family: monospace;
+            text-align: left;
+        }
+        .log {
+            margin-bottom: 5px;
+        }
+        .log.error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Triggers</h1>
+        <button class="button" onclick="startProcess()">Start</button>
+        <button class="button" onclick="stopProcess()">Stop</button>
+    </div>
+
+    <div id="logBox"></div>
+
+    <script>
+        function startProcess() {
+            fetch('/start')
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Process started');
+                        log('Process started');
+                    } else {
+                        console.error('Failed to start process');
+                        log('Failed to start process', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to start process:', error);
+                    log('Failed to start process: ' + error, 'error');
+                });
+        }
+
+        function stopProcess() {
+            fetch('/stop')
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Process stopped');
+                        log('Process stopped');
+                    } else {
+                        console.error('Failed to stop process');
+                        log('Failed to stop process', 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Failed to stop process:', error);
+                    log('Failed to stop process: ' + error, 'error');
+                });
+        }
+
+        function log(message, type = '') {
+            const logBox = document.getElementById('logBox');
+            const logElement = document.createElement('div');
+            logElement.textContent = message;
+            logElement.classList.add('log');
+            if (type === 'error') {
+                logElement.classList.add('error');
+            }
+            logBox.appendChild(logElement);
+        }
+    </script>
+</body>
+</html>
