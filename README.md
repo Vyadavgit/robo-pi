@@ -50,4 +50,30 @@ Note: Make sure to have OpenSSL installed on your system before running this scr
     rm -rf <venv name>
     ```
 
+### Configure SSH (Secure Shell) for remote access to Raspberry Pi. Programs can be triggered easily using ssh. 
+1. Enable SSH on Raspberry Pi:
+
+    You can enable SSH through Raspberry Pi Configuration Settings.
+
+    - Go to the Raspberry Pi Start Menu -> Preferences -> Raspberry Pi Configuration.
+    - In the Interfaces tab, ensure SSH is Enabled.
+    - Alternatively, you can enable SSH from the terminal: 
+        ```
+        sudo raspi-config
+        ```
+        Navigate to Interfacing Options -> SSH and enable it.
+
+2. Secure your Raspberry Pi:
+If you're planning to expose your Raspberry Pi to the internet, it's important to secure it. At a minimum, you should change the default password for the pi user. You can do this with the ```passwd``` command: 
+    ```
+    passwd
+    ```
+3. Access Raspberry Pi from a remote computer:
+On your remote computer, open a terminal (or Command Prompt on Windows), and use the ssh command to connect to your Raspberry Pi:
+    ```
+    ssh pi@raspberry_pi_ip
+    ```
+    Run command ```hostname -I``` for IP address of your Raspberry Pi. Replace raspberry_pi_ip with the IP address. You'll be prompted to enter the password for the pi user.
+4. Run the program:
+    Configure and activate venv and simply run ```python3 main.py``` to trigger the program.
 
