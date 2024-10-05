@@ -76,4 +76,4 @@ On your remote computer, open a terminal (or Command Prompt on Windows), and use
     Run command ```hostname -I``` for IP address of your Raspberry Pi. Replace raspberry_pi_ip with the IP address. You'll be prompted to enter the password for the pi user.
 4. Run the program:
     Configure and activate venv and simply run ```python3 main.py``` to trigger the program.
-
+5. Type ```exit``` or ```logout``` and press Enter. This is the standard way to end an SSH session.
