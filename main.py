@@ -31,10 +31,3 @@ while True:
     GPIO.output(In4, GPIO.LOW)
     GPIO.output(In3, GPIO.HIGH)
     pwm2.ChangeDutyCycle(80)
-
-    sleep(5)
-
-    # Stop both motors
-    pwm1.ChangeDutyCycle(0)
-    pwm2.ChangeDutyCycle(0)
-    sleep(5)
