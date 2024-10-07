@@ -21,13 +21,46 @@ GPIO.setup(In4, GPIO.OUT)
 pwm2 = GPIO.PWM(Enb, 100)
 pwm2.start(0)
 
-while True:
-    # Motor 1 forward
-    GPIO.output(In1, GPIO.LOW)
-    GPIO.output(In2, GPIO.HIGH)
-    pwm1.ChangeDutyCycle(80)
+# IR-08H Avoid Sensor (EN_IR, OUT_IR, PWR_IR, GND_IR)
+EN_IR, OUT_IR, PWR_IR, GND_IR = 5, 6, 13, 19
+EN_IR, OUT_IR = 5, 6
+GPIO.setup(EN_IR, GPIO.OUT)
+GPIO.setup(OUT_IR, GPIO.IN)
+GPIO.setup(PWR_IR, GPIO.OUT)
+GPIO.setup(GND_IR, GPIO.OUT)
+GPIO.output(EN_IR, GPIO.HIGH)
+GPIO.output(PWR_IR, GPIO.HIGH)
+GPIO.output(GND_IR, GPIO.LOW)
 
-    # Motor 2 forward
-    GPIO.output(In4, GPIO.LOW)
-    GPIO.output(In3, GPIO.HIGH)
-    pwm2.ChangeDutyCycle(80)
+while True:
+    # Check if obstacle is detected
+    if GPIO.input(OUT_IR) == GPIO.HIGH:
+        print("Obstacle detected")
+        # Stop motors
+        GPIO.output(In1, GPIO.LOW)
+        GPIO.output(In2, GPIO.LOW)
+        GPIO.output(In3, GPIO.LOW)
+        GPIO.output(In4, GPIO.LOW)
+        pwm1.ChangeDutyCycle(0)
+        pwm2.ChangeDutyCycle(0)
+        # Wait for obstacle to be removed
+        while GPIO.input(OUT_IR) == GPIO.HIGH:
+            sleep(0.1)
+    else:
+        # Motor 1 forward
+        GPIO.output(In1, GPIO.LOW)
+        GPIO.output(In2, GPIO.HIGH)
+        pwm1.ChangeDutyCycle(80)
+        # Motor 2 forward
+        GPIO.output(In4, GPIO.LOW)
+        GPIO.output(In3, GPIO.HIGH)
+        pwm2.ChangeDutyCycle(80)
+    # pwm1.ChangeDutyCycle(80)
+
+    # # Motor 2 forward
+    # GPIO.output(In4, GPIO.LOW)
+    # GPIO.output(In3, GPIO.HIGH)
+    # pwm2.ChangeDutyCycle(80)
+
+
+    
